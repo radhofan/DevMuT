@@ -17,7 +17,6 @@ from common.analyzelog_util import train_result_analyze
 import time
 from common.log_recoder import Logger
 from common.model_utils import get_model
-from scripts.run_textcnn import *
 import jax
 import jax.numpy as jnp
 import optax
@@ -62,22 +61,22 @@ def start_imageclassification_train(model_ms, model_torch, train_configs, train_
     else:
         final_device = 'cpu'
 
-    loss_fun_ms, loss_fun_torch, loss_fun_jax = get_loss(loss_name)
+    loss_fun_ms, loss_fun_torch = get_loss(loss_name)
     loss_fun_ms, loss_fun_torch = loss_fun_ms(), loss_fun_torch()
     loss_fun_torch = loss_fun_torch.to(final_device)
 
-    optimizer_ms, optimizer_torch, optimizer_jax = get_optimizer(optimizer)
+    optimizer_ms, optimizer_torch= get_optimizer(optimizer)
     optimizer_torch = optimizer_torch(model_torch.parameters(), lr=learning_rate)
-    optimizer_jax = optimizer_jax(learning_rate)
+    optimizer_jax = optax.sgd(learning_rate)
 
-    
+
     # params = model_torch.parameters()
     # params_torch = {name: param.detach().cpu().numpy() for name, param in model_torch.named_parameters()}
     # params_jax = {name: jnp.array(value) for name, value in params_torch.items()}
     params_torch = {key: value.detach().cpu().numpy() for key, value in model_torch.state_dict().items()}
     params_jax = {name: jnp.array(value, dtype=jnp.float32) for name, value in params_torch.items()}
     opt_state = optimizer_jax.init(params_jax)
-    
+
     # params 2 jax
 
     modelms_trainable_params = model_ms.trainable_params()
@@ -93,7 +92,7 @@ def start_imageclassification_train(model_ms, model_torch, train_configs, train_
 
     # old_params
     # old_torch_grads = {key: value.detach().cpu().numpy() for key, value in model_torch.state_dict().items()}
-    
+
     # old_jax_grads = params_jax
 
     dataset = get_dataset(dataset_name)
@@ -154,7 +153,7 @@ def start_imageclassification_train(model_ms, model_torch, train_configs, train_
             imgs_ms, targets_ms = mindspore.Tensor(imgs_array, mstype.float32), mindspore.Tensor(targets_array,
                                                                                                  mstype.int32)
             # if index1 == 0:
-                
+
             #     loss_ms, grads = train_step(imgs_ms, targets_ms)
             #     old_mindspore_grads = {param.name: grad.asnumpy() for param, grad in zip(model_ms.trainable_params(), grads)}
 
@@ -206,7 +205,7 @@ def start_imageclassification_train(model_ms, model_torch, train_configs, train_
             memory_info = process.memory_info()
             jax_memory_train_start = memory_info.rss / 1024 / 1024 / 1024
             jax_time_start = time.time()
-            
+
             # jaxparams 2 torchparams
             params_jax_numpy = {name: np.array(value) for name, value in params_jax.items()}
             params_torch_updated = {name: torch.from_numpy(value) for name, value in params_jax_numpy.items()}
@@ -219,7 +218,7 @@ def start_imageclassification_train(model_ms, model_torch, train_configs, train_
             # quit(66)
             model_torch.load_state_dict(params_torch_updated)
             outputs_torch_tensor = model_torch(imgs_torch)
-            
+
             jax_out_put  = outputs_torch_tensor.detach().cpu().numpy()
             jax_out_put_targets  = targets_torch.detach().cpu().numpy()
             loss_jax, jax_grads = jax.value_and_grad(loss_fn)(params_jax, jax_out_put, jax_out_put_targets)
@@ -230,7 +229,7 @@ def start_imageclassification_train(model_ms, model_torch, train_configs, train_
             jax_time_train = jax_time_end - jax_time_start
             memory_info = process.memory_info()
             jax_memory_train = memory_info.rss / 1024 / 1024 - jax_memory_train_start
-            
+
             # jax_grads_distance = chebyshev_distance(old_jax_grads, jax_grads)
             # old_jax_grads = jax_grads
             torch_grads = {key: value.detach().cpu().numpy() for key, value in model_torch.state_dict().items()}
