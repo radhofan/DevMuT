@@ -8,7 +8,7 @@ bash miniconda.sh -b -p $HOME/miniconda
 export PATH="$HOME/miniconda/bin:$PATH"
 
 # Set Up Conda env 
-conda create -n DevMuT python=3.9 -y
+conda create -n DevMuT python=3.12 -y
 conda activate DevMuT
 pip install --upgrade pip setuptools wheel
 conda install numpy
