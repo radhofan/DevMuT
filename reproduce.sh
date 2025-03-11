@@ -10,8 +10,22 @@ export PATH="$HOME/miniconda/bin:$PATH"
 # Set Up Conda env 
 conda create -n DevMuT python=3.9 -y
 conda activate DevMuT
-# conda install --file DevMuT/code/DevMuT/requirments.txt -c conda-forge -y
-pip install -r DevMuT/code/DevMuT/requirments.txt
+# pip install -r DevMuT/code/DevMuT/requirments.txt
+
+REQUIREMENTS_FILE="DevMuT/code/DevMuT/requirments.txt"
+while IFS= read -r package; do
+    # Skip empty lines or comments
+    if [[ -z "$package" || "$package" == "#"* ]]; then
+        continue
+    fi
+
+    echo "Installing $package..."
+    if ! pip install "$package"; then
+        echo "Failed to install $package"
+    fi
+done < "$REQUIREMENTS_FILE"
+
+echo "Installation process completed."
 
 # Set environment variables
 export CONTEXT_DEVICE_TARGET=GPU
