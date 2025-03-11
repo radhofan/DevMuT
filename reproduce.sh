@@ -10,30 +10,7 @@ export PATH="$HOME/miniconda/bin:$PATH"
 # Set Up Conda env 
 conda create -n DevMuT python=3.9 -y
 conda activate DevMuT
-pip install --upgrade pip setuptools wheel
-conda install numpy -y
-pip install jax==0.5.0
-conda install -c conda-forge pyarrow=12.0.1 -y
-conda install -c mindspore mindspore=2.2.14 -y
-
-# Requirements.txt
-REQUIREMENTS_FILE="DevMuT/code/DevMuT/requirments.txt"
-while IFS= read -r package; do
-    # Skip empty lines or comments
-    if [[ -z "$package" || "$package" == "#"* ]]; then
-        continue
-    fi
-
-    echo "Installing $package..."
-    if ! pip install "$package"; then
-        echo "Failed to install $package"
-    fi
-done < "$REQUIREMENTS_FILE"
-
-echo "Installation process completed."
-
-# Fix Dependencies
-conda install -c pytorch faiss-gpu=1.7.2
+conda install --file DevMuT/code/DevMuT/requirments.txt -y
 
 # Set environment variables
 export CONTEXT_DEVICE_TARGET=GPU
