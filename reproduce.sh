@@ -10,7 +10,8 @@ export PATH="$HOME/miniconda/bin:$PATH"
 # Set Up Conda env 
 conda create -n DevMuT python=3.9 -y
 conda activate DevMuT
-ppip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+pip install --upgrade pip setuptools wheel
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 pip install -r DevMuT/code/DevMuT/requirements.txt
 
 # Set environment variables
