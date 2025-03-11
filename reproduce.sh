@@ -16,7 +16,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvi
 
 # Set environment variables
 export CONTEXT_DEVICE_TARGET=GPU
-export VICES=0, 1
+export VICES=0,1
 
 # Run 
 python DevMuT/code/DevMuT/mutation_test.py
