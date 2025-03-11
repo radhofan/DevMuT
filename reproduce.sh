@@ -15,7 +15,7 @@ source ~/.bashrc
 eval "$(mamba shell hook --shell=bash)"
 
 # Set Up Conda env 
-mamba create -n -y DevMuT python=3.9
+mamba create -n DevMuT python=3.9 -y
 mamba activate DevMuT
 pip install --upgrade pip setuptools wheel
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
