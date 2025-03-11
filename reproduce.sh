@@ -10,7 +10,7 @@ export PATH="$HOME/miniconda/bin:$PATH"
 # Set Up Conda env 
 conda create -n DevMuT python=3.9
 conda activate DevMuT
-conda install --file DevMuT/code/DevMuT/requirments.txt
+conda install --file DevMuT/code/DevMuT/requirments.txt -c conda-forge -y
 
 # Set environment variables
 export CONTEXT_DEVICE_TARGET=GPU
