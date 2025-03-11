@@ -6,12 +6,17 @@ bash miniconda.sh -b -p $HOME/miniconda
 
 # Set environment variables
 export PATH="$HOME/miniconda/bin:$PATH"
+export MAMBA_ROOT_PREFIX="$HOME/miniconda"
+
+# Install Mamba
+conda install -c conda-forge mamba -y
+mamba shell init --shell=bash
+source ~/.bashrc  
+eval "$(mamba shell hook --shell=bash)"
 
 # Set Up Conda env 
-conda create -n DevMuT python=3.9 -y
-conda init
-source ~/.bashrc
-conda activate DevMuT
+mamba create -n -y DevMuT python=3.9
+mamba activate DevMuT
 pip install --upgrade pip setuptools wheel
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 pip install -r DevMuT/code/DevMuT/requirements.txt
