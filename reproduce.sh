@@ -8,13 +8,13 @@ bash miniconda.sh -b -p $HOME/miniconda
 export PATH="$HOME/miniconda/bin:$PATH"
 
 # Set Up Conda env 
-conda create -n DevMut python=3.9
-conda activate DevMut
-pip install -r devmut/code/devmut/requirments.txt
+conda create -n DevMuT python=3.9
+conda activate DevMuT
+pip install -r DevMuT/code/DevMuT/requirments.txt
 
 # Set environment variables
 export CONTEXT_DEVICE_TARGET=GPU
 export VICES=0, 1
 
 # Run 
-python devmut/code/devmut/mutation_test.py
+python DevMuT/code/DevMuT/mutation_test.py
