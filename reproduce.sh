@@ -18,7 +18,6 @@ eval "$(mamba shell hook --shell=bash)"
 mamba create -n DevMuT python=3.9 -y
 mamba activate DevMuT
 pip install --upgrade pip setuptools wheel
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 pip install -r DevMuT/code/DevMuT/requirements.txt
 
 # Set environment variables
