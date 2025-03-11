@@ -11,7 +11,7 @@ export PATH="$HOME/miniconda/bin:$PATH"
 conda create -n DevMuT python=3.9 -y
 conda activate DevMuT
 pip install --upgrade pip setuptools wheel
-pip install numpy==1.19.3
+conda install numpy=1.19.3
 pip install jax==0.5.0
 conda install -c conda-forge pyarrow=12.0.1
 conda install -c mindspore mindspore=2.2.14
