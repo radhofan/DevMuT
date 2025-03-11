@@ -11,10 +11,10 @@ export PATH="$HOME/miniconda/bin:$PATH"
 conda create -n DevMuT python=3.9 -y
 conda activate DevMuT
 pip install --upgrade pip setuptools wheel
-conda install numpy
+conda install numpy -y
 pip install jax==0.5.0
-conda install -c conda-forge pyarrow=12.0.1
-conda install -c mindspore mindspore=2.2.14
+conda install -c conda-forge pyarrow=12.0.1 -y
+conda install -c mindspore mindspore=2.2.14 -y
 
 # Requirements.txt
 REQUIREMENTS_FILE="DevMuT/code/DevMuT/requirments.txt"
