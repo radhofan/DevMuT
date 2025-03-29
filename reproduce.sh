@@ -7,12 +7,15 @@ bash miniconda.sh -b -u -p "$HOME/miniconda"
 # Set environment variables
 export PATH="$HOME/miniconda/bin:$PATH"
 echo 'export PATH="$HOME/miniconda/bin:$PATH"' >> ~/.bashrc
-
-# Source Conda
 source "$HOME/miniconda/etc/profile.d/conda.sh"
 
+# Add the bioconda channel
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+
 # Then install mamba
-conda install -c conda-forge libfmt -y
+conda install -c conda-forge mamba -y
 source "$HOME/miniconda/etc/profile.d/mamba.sh"
 
 # Set Up Conda env 
