@@ -11,6 +11,7 @@ echo 'export PATH="$HOME/miniconda/bin:$PATH"' >> ~/.bashrc
 # Source Conda directly instead of relying on ~/.bashrc
 source "$HOME/miniconda/etc/profile.d/conda.sh"
 source "$HOME/miniconda/etc/profile.d/mamba.sh"  # Ensure Mamba is loaded
+conda install -c conda-forge libfmt -y
 
 # Install Mamba
 conda install -c conda-forge mamba -y
@@ -21,7 +22,6 @@ source "$HOME/miniconda/etc/profile.d/conda.sh"  # Ensure changes are applied
 mamba create -n DevMuT python=3.9 -y
 source activate DevMuT  # Use `source` instead of `mamba activate`
 pip install --upgrade pip setuptools wheel
-mamba install -c conda-forge libfmt
 pip install -r "/home/DevMuT/code/DevMuT/requirements.txt"
 
 # Set environment variables
