@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Install Miniconda
-curl -fsSL https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh
+curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -o miniconda.sh
 bash miniconda.sh -b -p $HOME/miniconda
 
 # Set environment variables
