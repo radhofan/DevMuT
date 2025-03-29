@@ -17,12 +17,8 @@ conda config --set channel_priority strict
 conda install libfmt -y
 conda install fmt -y
 
-# Then install mamba
-conda install -c mamba -y
-source "$HOME/miniconda/etc/profile.d/mamba.sh"
-
 # Set Up Conda env 
-mamba create -n DevMuT python=3.9 -y
+conda create -n DevMuT python=3.9 -y
 conda activate DevMuT
 pip install --upgrade pip setuptools wheel
 pip install -r "/home/DevMuT/code/DevMuT/requirements.txt"
