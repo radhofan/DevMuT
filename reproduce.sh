@@ -21,12 +21,12 @@ source "$HOME/miniconda/etc/profile.d/conda.sh"  # Ensure changes are applied
 mamba create -n DevMuT python=3.9 -y
 source activate DevMuT  # Use `source` instead of `mamba activate`
 pip install --upgrade pip setuptools wheel
-pip install -r "$HOME/DevMuT/code/DevMuT/requirements.txt"
+pip install -r "/home/DevMuT/code/DevMuT/requirements.txt"
 
 # Set environment variables
 export CONTEXT_DEVICE_TARGET=GPU
 export CUDA_VISIBLE_DEVICES=0,1
 
 # Run 
-python3 "$HOME/DevMuT/code/DevMuT/mutation_test.py"
+python3 "/home/DevMuT/code/DevMuT/mutation_test.py"
 
