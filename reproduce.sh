@@ -11,11 +11,8 @@ echo 'export PATH="$HOME/miniconda/bin:$PATH"' >> ~/.bashrc
 # Source Conda
 source "$HOME/miniconda/etc/profile.d/conda.sh"
 
-# First install libfmt explicitly
-conda install -c conda-forge libfmt=11 -y
-
 # Then install mamba
-conda install -c conda-forge fmt
+conda install -c conda-forge libfmt -y
 source "$HOME/miniconda/etc/profile.d/mamba.sh"
 
 # Set Up Conda env 
