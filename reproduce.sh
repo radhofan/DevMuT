@@ -21,6 +21,7 @@ source "$HOME/miniconda/etc/profile.d/conda.sh"  # Ensure changes are applied
 mamba create -n DevMuT python=3.9 -y
 source activate DevMuT  # Use `source` instead of `mamba activate`
 pip install --upgrade pip setuptools wheel
+mamba install -c conda-forge libfmt
 pip install -r "/home/DevMuT/code/DevMuT/requirements.txt"
 
 # Set environment variables
