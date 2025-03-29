@@ -1,28 +1,28 @@
 #!/usr/bin/env bash
 
 # Install Miniconda
-curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -o miniconda.sh
-bash miniconda.sh -b -p $HOME/miniconda
+curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -o miniconda.sh
+bash miniconda.sh -b -p "$HOME/miniconda"
 
-# Set environment variables
+# Set environment variables and source changes
 export PATH="$HOME/miniconda/bin:$PATH"
-export MAMBA_ROOT_PREFIX="$HOME/miniconda"
+echo 'export PATH="$HOME/miniconda/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc  
 
 # Install Mamba
 conda install -c conda-forge mamba -y
 mamba shell init --shell=bash
 source ~/.bashrc  
-eval "$(mamba shell hook --shell=bash)"
 
 # Set Up Conda env 
 mamba create -n DevMuT python=3.9 -y
 mamba activate DevMuT
 pip install --upgrade pip setuptools wheel
-pip install -r DevMuT/code/DevMuT/requirements.txt
+pip install -r "$HOME/DevMuT/code/DevMuT/requirements.txt"
 
 # Set environment variables
 export CONTEXT_DEVICE_TARGET=GPU
-export VICES=0,1
+export CUDA_VISIBLE_DEVICES=0,1  # Fix the typo
 
 # Run 
-python DevMuT/code/DevMuT/mutation_test.py
+python3 "$HOME/DevMuT/code/DevMuT/mutation_test.py"
