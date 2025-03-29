@@ -14,8 +14,11 @@ conda config --add channels bioconda
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 
+conda install libfmt -y
+conda install fmt -y
+
 # Then install mamba
-conda install -c conda-forge mamba -y
+conda install -c mamba -y
 source "$HOME/miniconda/etc/profile.d/mamba.sh"
 
 # Set Up Conda env 
